@@ -186,12 +186,19 @@ The shortest distance between B and B is 9
 Select an option: 4
 
 9
+
 22
+
 NO SUCH ROUTE
+
 2
+
 3
+
 9
+
 9
+
 7
 
 ---------------------------------------------------------------------
