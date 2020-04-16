@@ -36,15 +36,39 @@ We are presented with a couple of options
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-1) Calculate the distance between routes gives you the distance between academies based on a path. For example, lets say you want to calculate the distance CEBCEBC.
+1) Calculate the distance between routes gives you the distance between academies based on a path. For example, lets say you want to calculate the distance CEBCEBC
 
 You would have to enter option 1 and consequently all the academies will be presented 
 Now you want to enter the route CEBCEBC. Once you enter that route you will be presented with the total distance to go through it from start to finish
 
-RESULT -> The distance between C and C is 18
+---------------------------------------------------------------------------
+Select an option: 1
 
-P.S: In the case the route is not valid an error message will appear such as NO SUCH ROUTE
+These are all the academies available:
 
+A B C D E
+
+Please enter route (ie; ABC, CDC, ADEC, BAC)
+
+CEBCEBC
+
+The distance between C and C is 18
+
+---------------------------------------------------------------------------
+In the case the route is not valid an error message appears 'NO SUCH ROUTE'
+---------------------------------------------------------------------------
+
+Select an option: 1
+
+These are all the academies available:
+
+A B C D E
+
+Please enter route (ie; ABC, CDC, ADEC, BAC)
+
+DAC
+
+NO SUCH ROUTE
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -186,19 +210,12 @@ The shortest distance between B and B is 9
 Select an option: 4
 
 9
-
 22
-
 NO SUCH ROUTE
-
 2
-
 3
-
 9
-
 9
-
 7
 
 ---------------------------------------------------------------------
