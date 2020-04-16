@@ -43,6 +43,7 @@ namespace bridge_dev_test_unit_tests
         [TestCase("C", "C", 3, true, false, 0)]
         [TestCase("A", "C", 4, false, false, 0)]
         [TestCase("C", "C", 0, false, true, 30)]
+        [TestCase("C", "C", 7, true, true, 30)]
         public void CalculateNumberOfTripsBetweenAcademies_ShouldReturnValue(
             string source, 
             string destination, 
