@@ -55,7 +55,9 @@ CEBCEBC
 The distance between C and C is 18
 
 ---------------------------------------------------------------------------
+
 In the case the route is not valid an error message appears 'NO SUCH ROUTE'
+
 ---------------------------------------------------------------------------
 
 Select an option: 1
@@ -77,7 +79,9 @@ NO SUCH ROUTE
 We are also presented with a couple of options like the following:
 
 a) Do you need to know all the routes up to a maximum number of stops (Requirement 4)
+
 b) Do you need to know all the routes with exactly a number of stops (Requirement 5)
+
 c) Do you need to know all the routes that do not exceed a certain distance (Requirement 8)
 
 Lets go through each scenario
@@ -108,6 +112,7 @@ Please enter the maximum number of stops
 3
 
 The number of trips between C and C is 2
+
 ---------------------------------------------------------------------	
 
 b)
@@ -203,20 +208,21 @@ Please enter destination route (ie; A, B, C, D, E)
 B
 
 The shortest distance between B and B is 9
+
 ---------------------------------------------------------------------
 
 4) Runs the test sample data provided but could be changed to accomodate for different routes/paths/distances
 
 Select an option: 4
 
-9
-22
-NO SUCH ROUTE
-2
-3
-9
-9
-7
+9 
+22 
+NO SUCH ROUTE 
+2 
+3 
+9 
+9 
+7 
 
 ---------------------------------------------------------------------
 
