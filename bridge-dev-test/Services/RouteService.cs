@@ -130,7 +130,43 @@ namespace bridge_dev_test.Services
             var stops = new List<string>();
             var finalStops = new List<string>();
 
-            if (hasMaxNumberOfStops)
+            if (hasMaximumDistance ^ hasMaxNumberOfStops)
+            {
+                if (hasMaxNumberOfStops)
+                {
+                    for (int i = 1; i <= numberOfStops; i++)
+                    {
+                        stops = differentRoutes[i].ToList();
+                        finalStops = stops.Where(x => x.StartsWith(source) && x.EndsWith(destination)).ToList();
+                        listOfMaxNumberOfStops.AddRange(finalStops);
+                    }
+
+                    return listOfMaxNumberOfStops.Count;
+                }
+
+                if (hasMaximumDistance)
+                {
+                    foreach (var routes in differentRoutes)
+                    {
+                        var routeOptions = routes.Where(x => x.StartsWith(source) && x.EndsWith(destination)).ToList();
+
+                        foreach (var routeOption in routeOptions)
+                        {
+                            var distance = GetDistanceBetweenRoutes(routeOption, routeConnectionsAndDistances);
+
+                            if (distance < maximumDistance)
+                            {
+                                listOfMaxDistances.Add(routeOption);
+                            }
+                        }
+                    }
+
+                    return listOfMaxDistances.Count();
+                }
+            }
+
+            
+            else if (hasMaximumDistance && hasMaxNumberOfStops)
             {
                 for (int i = 1; i <= numberOfStops; i++)
                 {
@@ -139,32 +175,25 @@ namespace bridge_dev_test.Services
                     listOfMaxNumberOfStops.AddRange(finalStops);
                 }
 
-                return listOfMaxNumberOfStops.Count;
-            }
-
-            if (hasMaximumDistance)
-            {
-                foreach (var routes in differentRoutes)
+                foreach (var routeOption in listOfMaxNumberOfStops)
                 {
-                    var routeOptions = routes.Where(x => x.StartsWith(source) && x.EndsWith(destination)).ToList();
+                    var distance = GetDistanceBetweenRoutes(routeOption, routeConnectionsAndDistances);
 
-                    foreach (var routeOption in routeOptions)
+                    if (distance < maximumDistance)
                     {
-                        var distance = GetDistanceBetweenRoutes(routeOption, routeConnectionsAndDistances);
-
-                        if (distance < maximumDistance)
-                        {
-                            listOfMaxDistances.Add(routeOption);
-                        }
+                        listOfMaxDistances.Add(routeOption);
                     }
                 }
 
                 return listOfMaxDistances.Count();
             }
 
-            stops = differentRoutes[numberOfStops].ToList();
-            finalStops = stops.Where(x => x.StartsWith(source) && x.EndsWith(destination)).ToList();
-            listOfMaxNumberOfStops.AddRange(finalStops);
+            else
+            {
+                stops = differentRoutes[numberOfStops].ToList();
+                finalStops = stops.Where(x => x.StartsWith(source) && x.EndsWith(destination)).ToList();
+                listOfMaxNumberOfStops.AddRange(finalStops);
+            }
 
             return listOfMaxNumberOfStops.Count;
         }

@@ -136,8 +136,15 @@ namespace bridge_dev_test
 
                     var maxNumberOfStopsOption = Console.ReadLine();
 
-                    if (maxNumberOfStopsOption == "Y")
+                    Console.WriteLine();
+                    Console.WriteLine("Do you have a maximum distance? (Y/N)");
+                    Console.WriteLine();
+
+                    var maxDistanceOption = Console.ReadLine();
+
+                    if (maxNumberOfStopsOption == "Y" && maxDistanceOption == "Y")
                     {
+
                         Console.WriteLine();
                         Console.WriteLine("Please enter the maximum number of stops");
                         Console.WriteLine();
@@ -146,51 +153,33 @@ namespace bridge_dev_test
 
                         Console.WriteLine();
 
+                        Console.WriteLine("Please enter the maximum distance");
+                        Console.WriteLine();
+
+                        var maxDist = Console.ReadLine();
+
+                        Console.WriteLine();
+
                         var numberOfTripsBetweenTwoPoints = _routeService.GetNumberOfTripsBetweenTwoAcademies(
                             source,
                             destination,
                             lookupRoutes,
                             academiesAvailable,
-                            true, false, Convert.ToInt32(maxNumberOfStops), 0);
+                            true, true, Convert.ToInt32(maxNumberOfStops), Convert.ToInt32(maxDist));
 
                         Console.WriteLine("The number of trips between " + source + " and " + destination + " is " + numberOfTripsBetweenTwoPoints);
 
                     }
-                    else
+
+                    else if (maxNumberOfStopsOption == "Y" ^ maxDistanceOption == "Y")
                     {
-                        Console.WriteLine();
-                        Console.WriteLine("Do you have a maximum distance? (Y/N)");
-                        Console.WriteLine();
-
-                        var maximumDistanceOption = Console.ReadLine();
-
-                        if (maximumDistanceOption == "Y")
-                        {
-
-                            Console.WriteLine();
-                            Console.WriteLine("Please enter the maximum distance: ");
-                            Console.WriteLine();
-
-                            var maximumDistance = Console.ReadLine();
-
-                            var maxDistance = _routeService.GetNumberOfTripsBetweenTwoAcademies(
-                                source,
-                                destination,
-                                lookupRoutes,
-                                academiesAvailable,
-                                false, true, 0, Convert.ToInt32(maximumDistance));
-
-                            Console.WriteLine();
-                            Console.WriteLine("The number of trips between " + source + " and " + destination + " is " + maxDistance);
-
-                        }
-                        else
+                        if (maxNumberOfStopsOption == "Y")
                         {
                             Console.WriteLine();
-                            Console.WriteLine("Please enter the number of stops");
+                            Console.WriteLine("Please enter the maximum number of stops");
                             Console.WriteLine();
 
-                            var numberOfStops = Console.ReadLine();
+                            var maxNumberOfStops = Console.ReadLine();
 
                             Console.WriteLine();
 
@@ -199,14 +188,56 @@ namespace bridge_dev_test
                                 destination,
                                 lookupRoutes,
                                 academiesAvailable,
-                                false, false, Convert.ToInt32(numberOfStops), 0);
+                                true, false, Convert.ToInt32(maxNumberOfStops), 0);
 
                             Console.WriteLine("The number of trips between " + source + " and " + destination + " is " + numberOfTripsBetweenTwoPoints);
+                        }
 
+                        if (maxDistanceOption == "Y")
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Please enter the maximum distance");
+                            Console.WriteLine();
+
+                            var maxDistanceNumber = Console.ReadLine();
+
+                            Console.WriteLine();
+
+                            var numberOfTripsBetweenTwoPoints = _routeService.GetNumberOfTripsBetweenTwoAcademies(
+                                source,
+                                destination,
+                                lookupRoutes,
+                                academiesAvailable,
+                                false, true, 0, Convert.ToInt32(maxDistanceNumber));
+
+                            Console.WriteLine("The number of trips between " + source + " and " + destination + " is " + numberOfTripsBetweenTwoPoints);
                         }
 
                     }
 
+                    else
+                    {
+
+                        Console.WriteLine();
+                        Console.WriteLine("Please enter exactly the number of stops");
+                        Console.WriteLine();
+
+                        var numberOfStops = Console.ReadLine();
+
+                        Console.WriteLine();
+
+                        var numberOfTripsBetweenTwoPoints = _routeService.GetNumberOfTripsBetweenTwoAcademies(
+                            source,
+                            destination,
+                            lookupRoutes,
+                            academiesAvailable,
+                            false, false, Convert.ToInt32(numberOfStops), 0);
+
+                        Console.WriteLine("The number of trips between " + source + " and " + destination + " is " + numberOfTripsBetweenTwoPoints);
+
+
+                    }
+  
                     Console.WriteLine();
 
                     return true;
