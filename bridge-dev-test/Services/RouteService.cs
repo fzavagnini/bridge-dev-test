@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace bridge_dev_test.Services
 {
@@ -10,7 +11,7 @@ namespace bridge_dev_test.Services
             Dictionary<string, List<Tuple<string, int>>> test)
         {
             List<int?> shortestDistanceBetweenPoints = new List<int?>();
-
+            List<Tuple<int?, string>> shortestDistanceBetweenPointsWithRoute = new List<Tuple<int?, string>>();
             foreach (var routes in lookupRoutesTable)
             {
                 var routeOptions = routes.Where(x => x.StartsWith(source) && x.EndsWith(destination)).ToList();
@@ -19,6 +20,7 @@ namespace bridge_dev_test.Services
                 {
                     var distance = GetDistanceBetweenRoutes(routeOption, test);
                     shortestDistanceBetweenPoints.Add(distance);
+                    shortestDistanceBetweenPointsWithRoute.Add(new Tuple<int?, string>(distance, routeOption));
                 }
             }
 
@@ -49,7 +51,7 @@ namespace bridge_dev_test.Services
 
         public Tuple<Tuple<string, string>, int> ProcessSingleRoute(string route)
         {
-            return new Tuple<Tuple<string, string>, int>(new Tuple<string, string>(Convert.ToString(route[0]), Convert.ToString(route[1])), Convert.ToInt32(route[2].ToString()));
+            return new Tuple<Tuple<string, string>, int>(new Tuple<string, string>(Convert.ToString(route[0]), Convert.ToString(route[1])), Convert.ToInt32(Regex.Match(route, @"\d+").Value));
         }
 
         public List<Tuple<Tuple<string, string>, int>> ProcessAllRoutes(string routes)

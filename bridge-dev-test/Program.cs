@@ -39,7 +39,7 @@ namespace bridge_dev_test
 
         private static void InitializeMenu()
         {
-            List<Tuple<Tuple<string, string>, int>> dataStructure = _routeService.ProcessAllRoutes("AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7");
+            List<Tuple<Tuple<string, string>, int>> dataStructure = _routeService.ProcessAllRoutes("AB3, AF4, AH18, BC14, BJ50, CD10, CF12, DE8, DF9, ED8, EF6, EG5, FD9, GA2, GE5, HA18, HI20, IJ25, IB35, JB50");
 
             var routeConnectionsAndDistances = _routeService.ProcessRouteConnectionsAndDistances(dataStructure);
 
@@ -68,6 +68,9 @@ namespace bridge_dev_test
             Console.WriteLine("4) Run test input sample data (AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7)");
             Console.WriteLine("5) Exit");
             Console.Write("\r\nSelect an option: ");
+
+            int? distanceTest = 0;
+            string distanceTestDisplay = string.Empty;
 
             switch (Console.ReadLine())
             {
@@ -235,22 +238,25 @@ namespace bridge_dev_test
 
                     Console.WriteLine();
 
-                    List<Tuple<Tuple<string, string>, int>> dataStructure = _routeService.ProcessAllRoutes("AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7");
+                    List<Tuple<Tuple<string, string>, int>> dataStructure = _routeService.ProcessAllRoutes("AB3, AF4, AH18, BC14, BJ50, CD10, CF12, DE8, DF9, ED8, EF6, EG5, FD9, GA2, GE5, HA18, HI20, IJ25, IB35, JB50");
                     var fixedNumberOfStops = 10;
                     var differentRoutes = _routeService.GetRoutesBasedOnNumberOfStops(academiesAvailable, fixedNumberOfStops);
 
                     var routeConnectionsAndDistances = _routeService.ProcessRouteConnectionsAndDistances(dataStructure);
                     //1
-                    var distanceOne = _routeService.GetDistanceBetweenRoutes("ABC", routeConnectionsAndDistances);
-                    Console.WriteLine(distanceOne);
+                    distanceTest = _routeService.GetDistanceBetweenRoutes("ABC", routeConnectionsAndDistances);
+                    distanceTestDisplay = distanceTest == null ? "NO SUCH ROUTE" : Convert.ToString(distanceTest);
+                    Console.WriteLine(distanceTestDisplay);
 
                     //2
-                    var distanceTwo = _routeService.GetDistanceBetweenRoutes("AEBCD", routeConnectionsAndDistances);
-                    Console.WriteLine(distanceTwo);
+                    distanceTest = _routeService.GetDistanceBetweenRoutes("AEBCD", routeConnectionsAndDistances);
+                    distanceTestDisplay = distanceTest == null ? "NO SUCH ROUTE" : Convert.ToString(distanceTest);
+                    Console.WriteLine(distanceTestDisplay);
 
                     //3
-                    if (!_routeService.IsValidRoute("AED", routeConnectionsAndDistances))
-                        Console.WriteLine("NO SUCH ROUTE");
+                    distanceTest = _routeService.GetDistanceBetweenRoutes("AED", routeConnectionsAndDistances);
+                    distanceTestDisplay = distanceTest == null ? "NO SUCH ROUTE" : Convert.ToString(distanceTest);
+                    Console.WriteLine(distanceTestDisplay);
 
                     //4
                     var numberOfTripsBetweenTwoPointss = _routeService.GetNumberOfTripsBetweenTwoAcademies("C", "C", differentRoutes, routeConnectionsAndDistances, true, false, 3, 0);
